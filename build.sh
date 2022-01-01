@@ -144,7 +144,8 @@ ln -s `python -c "import numpy as np; print(np.__path__[0])"`/core/include/numpy
 mkdir -p deps
 cd deps
 
-git clone "git clone --branch 3.4.1 --depth=1 https://github.com/opencv/opencv.git"
+git clone "https://github.com/opencv/opencv.git"
+git checkout 3.4.1
 cd opencv
 mkdir -p build
 cd build
