@@ -195,7 +195,6 @@ OpenCV_DIR=$(pwd)
 cd ../..
 
 if [ -z "${BOOST_ROOT}" -a ! -d boost ]; then
-  highlight "Building boost..."
   wget --no-clobber -O boost_1_62_0.tar.bz2 https://sourceforge.net/projects/boost/files/boost/1.62.0/boost_1_62_0.tar.bz2/download
   tar -xjf boost_1_62_0.tar.bz2 > /dev/null
   rm boost_1_62_0.tar.bz2
@@ -209,7 +208,6 @@ if [ -z "${BOOST_ROOT}" -a ! -d boost ]; then
 fi
 
 # build pangolin
-highlight "Building pangolin..."
 git_clone "git clone --depth=1 https://github.com/stevenlovegrove/Pangolin.git"
 cd Pangolin
 git pull
@@ -221,7 +219,6 @@ Pangolin_DIR=$(pwd)
 cd ../..
 
 # build OpenNI2
-highlight "Building openni2..."
 git_clone "git clone --depth=1 https://github.com/occipital/OpenNI2.git"
 cd OpenNI2
 git pull
@@ -229,7 +226,6 @@ make -j8
 cd ..
 
 # build freetype-gl-cpp
-highlight "Building freetype-gl-cpp..."
 git_clone "git clone --depth=1 --recurse-submodules https://github.com/martinruenz/freetype-gl-cpp.git"
 cd freetype-gl-cpp
 mkdir -p build
@@ -240,7 +236,6 @@ make install
 cd ../..
 
 # build DenseCRF, see: http://graphics.stanford.edu/projects/drf/
-highlight "Building densecrf..."
 git_clone "git clone --depth=1 https://github.com/martinruenz/densecrf.git"
 cd densecrf
 git pull
@@ -254,7 +249,6 @@ make -j8
 cd ../..
 
 # build gSLICr, see: http://www.robots.ox.ac.uk/~victor/gslicr/
-highlight "Building gslicr..."
 git_clone "git clone --depth=1 https://github.com/carlren/gSLICr.git"
 cd gSLICr
 git pull
@@ -270,7 +264,6 @@ make -j8
 cd ../..
 
 # Prepare MaskRCNN and data
-highlight "Building mask-rcnn with ms-coco..."
 git_clone "git clone --depth=1 https://github.com/matterport/Mask_RCNN.git"
 git_clone "git clone --depth=1 https://github.com/waleedka/coco.git"
 cd coco/PythonAPI
@@ -284,7 +277,6 @@ wget --no-clobber https://github.com/matterport/Mask_RCNN/releases/download/v1.0
 cd ../..
 
 # c++ toml
-highlight "Building toml11..."
 git_clone "git clone --depth=1 --branch v2.4.0 https://github.com/ToruNiina/toml11.git"
 
 cd ..
@@ -295,7 +287,6 @@ if [ -z "${BOOST_ROOT}" -a -d deps/boost ]; then
 fi
 
 # Build MaskFusion
-highlight "Building MaskFusion..."
 mkdir -p build
 cd build
 ln -s ../deps/Mask_RCNN ./ || true # Also, make sure that the file 'mask_rcnn_model.h5' is linked or present
