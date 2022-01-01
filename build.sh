@@ -146,7 +146,7 @@ mkdir -p deps
 cd deps
 
 git clone "https://github.com/opencv/opencv.git"
-git checkout 3.4
+#git checkout 3.4
 cd opencv
 mkdir -p build
 cd build
