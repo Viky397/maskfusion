@@ -60,8 +60,8 @@ cd $(dirname `realpath $0`)
 #     sudo add-apt-repository -y ppa:openjdk-r/ppa
 #   fi
 
-  sudo apt-get update > /dev/null
-  sudo apt-get install -y \
+  apt-get update > /dev/null
+  apt-get install -y \
     build-essential \
     cmake \
     freeglut3-dev \
@@ -81,7 +81,7 @@ cd $(dirname `realpath $0`)
     libboost-all-dev \
     libfreetype6-dev
 
-    sudo -H pip3 install virtualenv
+    -H pip3 install virtualenv
 
 #   if [[ $DISTRIB_CODENAME == *"trusty"* ]] ; then
 #      # switch to g++-4.9
