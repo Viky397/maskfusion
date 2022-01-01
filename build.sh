@@ -208,7 +208,7 @@ if [ -z "${BOOST_ROOT}" -a ! -d boost ]; then
 fi
 
 # build pangolin
-git clone "git clone --depth=1 https://github.com/stevenlovegrove/Pangolin.git"
+git clone "https://github.com/stevenlovegrove/Pangolin.git"
 cd Pangolin
 git pull
 mkdir -p build
@@ -219,14 +219,14 @@ Pangolin_DIR=$(pwd)
 cd ../..
 
 # build OpenNI2
-git clone "git clone --depth=1 https://github.com/occipital/OpenNI2.git"
+git clone "https://github.com/occipital/OpenNI2.git"
 cd OpenNI2
 git pull
 make -j8
 cd ..
 
 # build freetype-gl-cpp
-git clone "git clone --depth=1 --recurse-submodules https://github.com/martinruenz/freetype-gl-cpp.git"
+git clone "--recurse-submodules https://github.com/martinruenz/freetype-gl-cpp.git"
 cd freetype-gl-cpp
 mkdir -p build
 cd build
@@ -236,7 +236,7 @@ make install
 cd ../..
 
 # build DenseCRF, see: http://graphics.stanford.edu/projects/drf/
-git clone "git clone --depth=1 https://github.com/martinruenz/densecrf.git"
+git clone "https://github.com/martinruenz/densecrf.git"
 cd densecrf
 git pull
 mkdir -p build
@@ -249,7 +249,7 @@ make -j8
 cd ../..
 
 # build gSLICr, see: http://www.robots.ox.ac.uk/~victor/gslicr/
-git clone "git clone --depth=1 https://github.com/carlren/gSLICr.git"
+git clone "https://github.com/carlren/gSLICr.git"
 cd gSLICr
 git pull
 mkdir -p build
@@ -264,8 +264,8 @@ make -j8
 cd ../..
 
 # Prepare MaskRCNN and data
-git clone "git clone --depth=1 https://github.com/matterport/Mask_RCNN.git"
-git clone "git clone --depth=1 https://github.com/waleedka/coco.git"
+git clone "https://github.com/matterport/Mask_RCNN.git"
+git clone "https://github.com/waleedka/coco.git"
 cd coco/PythonAPI
 make
 make install # Make sure to source the correct python environment first
@@ -277,7 +277,8 @@ wget --no-clobber https://github.com/matterport/Mask_RCNN/releases/download/v1.0
 cd ../..
 
 # c++ toml
-git clone "git clone --depth=1 --branch v2.4.0 https://github.com/ToruNiina/toml11.git"
+git clone "https://github.com/ToruNiina/toml11.git"
+git checkout v2.4.0
 
 cd ..
 fi # --build-dependencies
