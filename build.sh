@@ -60,28 +60,28 @@ cd $(dirname `realpath $0`)
 #     sudo add-apt-repository -y ppa:openjdk-r/ppa
 #   fi
 
-#   sudo apt-get update > /dev/null
-#   sudo apt-get install -y \
-#     build-essential \
-#     cmake \
-#     freeglut3-dev \
-#     git \
-#     g++ \
-#     gcc \
-#     libeigen3-dev \
-#     libglew-dev \
-#     libjpeg-dev \
-#     libsuitesparse-dev \
-#     libudev-dev \
-#     libusb-1.0-0-dev \
-#     openjdk-8-jdk \
-#     unzip \
-#     zlib1g-dev \
-#     cython3 \
-#     libboost-all-dev \
-#     libfreetype6-dev
+  sudo apt-get update > /dev/null
+  sudo apt-get install -y \
+    build-essential \
+    cmake \
+    freeglut3-dev \
+    git \
+    g++ \
+    gcc \
+    libeigen3-dev \
+    libglew-dev \
+    libjpeg-dev \
+    libsuitesparse-dev \
+    libudev-dev \
+    libusb-1.0-0-dev \
+    openjdk-8-jdk \
+    unzip \
+    zlib1g-dev \
+    cython3 \
+    libboost-all-dev \
+    libfreetype6-dev
 
-#     sudo -H pip3 install virtualenv
+    sudo -H pip3 install virtualenv
 
 #   if [[ $DISTRIB_CODENAME == *"trusty"* ]] ; then
 #      # switch to g++-4.9
