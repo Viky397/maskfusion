@@ -23,106 +23,106 @@
 # Function that executes the clone command given as $1 iff repo does not exist yet. Otherwise pulls.
 # Only works if repository path ends with '.git'
 # Example: git_clone "git clone --branch 3.4.1 --depth=1 https://github.com/opencv/opencv.git"
-function git_clone(){
-  repo_dir=`basename "$1" .git`
-  git -C "$repo_dir" pull 2> /dev/null || eval "$1"
-}
+# function git_clone(){
+#   repo_dir=`basename "$1" .git`
+#   git -C "$repo_dir" pull 2> /dev/null || eval "$1"
+# }
 
 # Ensure that current directory is root of project
 cd $(dirname `realpath $0`)
 
-# Enable colors
-source deps/bashcolors/bash_colors.sh
-function highlight(){
-  clr_magentab clr_bold clr_white "$1"
-}
+# # Enable colors
+# source deps/bashcolors/bash_colors.sh
+# function highlight(){
+#   clr_magentab clr_bold clr_white "$1"
+# }
 
-highlight "Starting MaskFusion build script ..."
-echo "Available parameters:
-        --install-packages
-        --install-cuda
-        --build-dependencies"
+# highlight "Starting MaskFusion build script ..."
+# echo "Available parameters:
+#         --install-packages
+#         --install-cuda
+#         --build-dependencies"
 
-if [[ $* == *--install-packages* ]] ; then
-  highlight "Installing system packages..."
-  # Get ubuntu version:
-  sudo apt-get install -y wget software-properties-common
-  source /etc/lsb-release # fetch DISTRIB_CODENAME
-  if [[ $DISTRIB_CODENAME == *"trusty"* ]] ; then
-    # g++ 4.9.4
-    sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-    sudo apt-get install \
-      g++-4.9 \
-      gcc-4.9
-    # cmake 3.2.2
-    sudo add-apt-repository -y ppa:george-edison55/cmake-3.x
-    # openjdk 8
-    sudo add-apt-repository -y ppa:openjdk-r/ppa
-  fi
+# if [[ $* == *--install-packages* ]] ; then
+#   highlight "Installing system packages..."
+#   # Get ubuntu version:
+#   sudo apt-get install -y wget software-properties-common
+#   source /etc/lsb-release # fetch DISTRIB_CODENAME
+#   if [[ $DISTRIB_CODENAME == *"trusty"* ]] ; then
+#     # g++ 4.9.4
+#     sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+#     sudo apt-get install \
+#       g++-4.9 \
+#       gcc-4.9
+#     # cmake 3.2.2
+#     sudo add-apt-repository -y ppa:george-edison55/cmake-3.x
+#     # openjdk 8
+#     sudo add-apt-repository -y ppa:openjdk-r/ppa
+#   fi
 
-  sudo apt-get update > /dev/null
-  sudo apt-get install -y \
-    build-essential \
-    cmake \
-    freeglut3-dev \
-    git \
-    g++ \
-    gcc \
-    libeigen3-dev \
-    libglew-dev \
-    libjpeg-dev \
-    libsuitesparse-dev \
-    libudev-dev \
-    libusb-1.0-0-dev \
-    openjdk-8-jdk \
-    unzip \
-    zlib1g-dev \
-    cython3 \
-    libboost-all-dev \
-    libfreetype6-dev
+#   sudo apt-get update > /dev/null
+#   sudo apt-get install -y \
+#     build-essential \
+#     cmake \
+#     freeglut3-dev \
+#     git \
+#     g++ \
+#     gcc \
+#     libeigen3-dev \
+#     libglew-dev \
+#     libjpeg-dev \
+#     libsuitesparse-dev \
+#     libudev-dev \
+#     libusb-1.0-0-dev \
+#     openjdk-8-jdk \
+#     unzip \
+#     zlib1g-dev \
+#     cython3 \
+#     libboost-all-dev \
+#     libfreetype6-dev
 
-    sudo -H pip3 install virtualenv
+#     sudo -H pip3 install virtualenv
 
-  if [[ $DISTRIB_CODENAME == *"trusty"* ]] ; then
-     # switch to g++-4.9
-     sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.9
-     # switch to java-1.8.0
-     sudo update-java-alternatives -s java-1.8.0-openjdk-amd64
-  fi
+#   if [[ $DISTRIB_CODENAME == *"trusty"* ]] ; then
+#      # switch to g++-4.9
+#      sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.9
+#      # switch to java-1.8.0
+#      sudo update-java-alternatives -s java-1.8.0-openjdk-amd64
+#   fi
 
-fi # --install-packages
+# fi # --install-packages
 
 
-if [[ $* == *--install-cuda* ]] ; then
-  highlight "Installing CUDA..."
-  # Get ubuntu version:
-  sudo apt-get install -y wget software-properties-common
-  source /etc/lsb-release # fetch DISTRIB_CODENAME
-  if [[ $DISTRIB_CODENAME == *"trusty"* ]] ; then
-    # CUDA
-    wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1404/x86_64/cuda-repo-ubuntu1404_7.5-18_amd64.deb
-    sudo dpkg -i cuda-repo-ubuntu1404_7.5-18_amd64.deb
-    rm cuda-repo-ubuntu1404_7.5-18_amd64.deb
-    sudo apt-get update > /dev/null
-    sudo apt-get install -y cuda-7-5
-  elif [[ $DISTRIB_CODENAME == *"vivid"* ]] ; then
-    # CUDA
-    wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1504/x86_64/cuda-repo-ubuntu1504_7.5-18_amd64.deb
-    sudo dpkg -i cuda-repo-ubuntu1504_7.5-18_amd64.deb
-    rm cuda-repo-ubuntu1504_7.5-18_amd64.deb
-    sudo apt-get update > /dev/null
-    sudo apt-get install cuda-7-5
-  elif [[ $DISTRIB_CODENAME == *"xenial"* ]]; then
-    wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_8.0.44-1_amd64.deb
-    sudo dpkg -i cuda-repo-ubuntu1604_8.0.44-1_amd64.deb
-    rm cuda-repo-ubuntu1604_8.0.44-1_amd64.deb
-    sudo apt-get update > /dev/null
-    sudo apt-get install -y cuda-8-0
-  else
-    echo "$DISTRIB_CODENAME is not yet supported"
-    exit 1
-  fi
-fi # --install-cuda
+# if [[ $* == *--install-cuda* ]] ; then
+#   highlight "Installing CUDA..."
+#   # Get ubuntu version:
+#   sudo apt-get install -y wget software-properties-common
+#   source /etc/lsb-release # fetch DISTRIB_CODENAME
+#   if [[ $DISTRIB_CODENAME == *"trusty"* ]] ; then
+#     # CUDA
+#     wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1404/x86_64/cuda-repo-ubuntu1404_7.5-18_amd64.deb
+#     sudo dpkg -i cuda-repo-ubuntu1404_7.5-18_amd64.deb
+#     rm cuda-repo-ubuntu1404_7.5-18_amd64.deb
+#     sudo apt-get update > /dev/null
+#     sudo apt-get install -y cuda-7-5
+#   elif [[ $DISTRIB_CODENAME == *"vivid"* ]] ; then
+#     # CUDA
+#     wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1504/x86_64/cuda-repo-ubuntu1504_7.5-18_amd64.deb
+#     sudo dpkg -i cuda-repo-ubuntu1504_7.5-18_amd64.deb
+#     rm cuda-repo-ubuntu1504_7.5-18_amd64.deb
+#     sudo apt-get update > /dev/null
+#     sudo apt-get install cuda-7-5
+#   elif [[ $DISTRIB_CODENAME == *"xenial"* ]]; then
+#     wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_8.0.44-1_amd64.deb
+#     sudo dpkg -i cuda-repo-ubuntu1604_8.0.44-1_amd64.deb
+#     rm cuda-repo-ubuntu1604_8.0.44-1_amd64.deb
+#     sudo apt-get update > /dev/null
+#     sudo apt-get install -y cuda-8-0
+#   else
+#     echo "$DISTRIB_CODENAME is not yet supported"
+#     exit 1
+#   fi
+# fi # --install-cuda
 
 
 # Create virtual python environment and install packages
