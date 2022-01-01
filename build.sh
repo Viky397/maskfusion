@@ -126,7 +126,6 @@ cd $(dirname `realpath $0`)
 
 
 # Create virtual python environment and install packages
-highlight "Setting up virtual python environment..."
 virtualenv python-environment
 source python-environment/bin/activate
 pip3 install pip --upgrade
@@ -145,7 +144,6 @@ ln -s `python -c "import numpy as np; print(np.__path__[0])"`/core/include/numpy
 mkdir -p deps
 cd deps
 
-highlight "Building opencv..."
 git_clone "git clone --branch 3.4.1 --depth=1 https://github.com/opencv/opencv.git"
 cd opencv
 mkdir -p build
