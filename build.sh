@@ -144,7 +144,7 @@ ln -s `python -c "import numpy as np; print(np.__path__[0])"`/core/include/numpy
 mkdir -p deps
 cd deps
 
-git_clone "git clone --branch 3.4.1 --depth=1 https://github.com/opencv/opencv.git"
+git clone "git clone --branch 3.4.1 --depth=1 https://github.com/opencv/opencv.git"
 cd opencv
 mkdir -p build
 cd build
@@ -206,7 +206,7 @@ if [ -z "${BOOST_ROOT}" -a ! -d boost ]; then
 fi
 
 # build pangolin
-git_clone "git clone --depth=1 https://github.com/stevenlovegrove/Pangolin.git"
+git clone "git clone --depth=1 https://github.com/stevenlovegrove/Pangolin.git"
 cd Pangolin
 git pull
 mkdir -p build
@@ -217,14 +217,14 @@ Pangolin_DIR=$(pwd)
 cd ../..
 
 # build OpenNI2
-git_clone "git clone --depth=1 https://github.com/occipital/OpenNI2.git"
+git clone "git clone --depth=1 https://github.com/occipital/OpenNI2.git"
 cd OpenNI2
 git pull
 make -j8
 cd ..
 
 # build freetype-gl-cpp
-git_clone "git clone --depth=1 --recurse-submodules https://github.com/martinruenz/freetype-gl-cpp.git"
+git clone "git clone --depth=1 --recurse-submodules https://github.com/martinruenz/freetype-gl-cpp.git"
 cd freetype-gl-cpp
 mkdir -p build
 cd build
@@ -234,7 +234,7 @@ make install
 cd ../..
 
 # build DenseCRF, see: http://graphics.stanford.edu/projects/drf/
-git_clone "git clone --depth=1 https://github.com/martinruenz/densecrf.git"
+git clone "git clone --depth=1 https://github.com/martinruenz/densecrf.git"
 cd densecrf
 git pull
 mkdir -p build
@@ -247,7 +247,7 @@ make -j8
 cd ../..
 
 # build gSLICr, see: http://www.robots.ox.ac.uk/~victor/gslicr/
-git_clone "git clone --depth=1 https://github.com/carlren/gSLICr.git"
+git clone "git clone --depth=1 https://github.com/carlren/gSLICr.git"
 cd gSLICr
 git pull
 mkdir -p build
@@ -262,8 +262,8 @@ make -j8
 cd ../..
 
 # Prepare MaskRCNN and data
-git_clone "git clone --depth=1 https://github.com/matterport/Mask_RCNN.git"
-git_clone "git clone --depth=1 https://github.com/waleedka/coco.git"
+git clone "git clone --depth=1 https://github.com/matterport/Mask_RCNN.git"
+git clone "git clone --depth=1 https://github.com/waleedka/coco.git"
 cd coco/PythonAPI
 make
 make install # Make sure to source the correct python environment first
@@ -275,7 +275,7 @@ wget --no-clobber https://github.com/matterport/Mask_RCNN/releases/download/v1.0
 cd ../..
 
 # c++ toml
-git_clone "git clone --depth=1 --branch v2.4.0 https://github.com/ToruNiina/toml11.git"
+git clone "git clone --depth=1 --branch v2.4.0 https://github.com/ToruNiina/toml11.git"
 
 cd ..
 fi # --build-dependencies
