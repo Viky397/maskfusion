@@ -81,7 +81,7 @@ cd $(dirname `realpath $0`)
     libboost-all-dev \
     libfreetype6-dev
 
-    -H pip3 install virtualenv
+    pip3 install virtualenv
 
 #   if [[ $DISTRIB_CODENAME == *"trusty"* ]] ; then
 #      # switch to g++-4.9
