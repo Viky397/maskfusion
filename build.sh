@@ -226,7 +226,7 @@ make -j8
 cd ..
 
 # build freetype-gl-cpp
-git clone "https://github.com/martinruenz/freetype-gl-cpp.git"
+git clone --recurse-submodules "https://github.com/martinruenz/freetype-gl-cpp.git"
 cd freetype-gl-cpp
 mkdir -p build
 cd build
