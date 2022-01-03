@@ -62,6 +62,7 @@ cd $(dirname `realpath $0`)
 
   apt-get update > /dev/null
   apt-get install -y \
+    python3-pip
     wget \
     build-essential \
     cmake \
