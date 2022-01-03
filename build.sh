@@ -132,7 +132,7 @@ cd $(dirname `realpath $0`)
 virtualenv python-environment
 source python-environment/bin/activate
 pip3 install pip --upgrade
-pip3 install tensorflow-gpu==1.13.1
+pip3 install tensorflow-gpu==1.14.0
 pip3 install scikit-image
 pip3 install keras
 pip3 install IPython
