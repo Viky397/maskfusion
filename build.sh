@@ -279,6 +279,7 @@ cd ../..
 
 # c++ toml
 git clone "https://github.com/ToruNiina/toml11.git"
+cd toml11
 git checkout v2.4.0
 
 cd ..
