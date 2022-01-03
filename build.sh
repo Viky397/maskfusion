@@ -291,6 +291,7 @@ if [ -z "${BOOST_ROOT}" -a -d deps/boost ]; then
 fi
 
 # Build MaskFusion
+cd ..
 mkdir -p build
 cd build
 ln -s ../deps/Mask_RCNN ./ || true # Also, make sure that the file 'mask_rcnn_model.h5' is linked or present
