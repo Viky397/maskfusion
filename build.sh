@@ -62,7 +62,8 @@ cd $(dirname `realpath $0`)
 
   apt-get update > /dev/null
   apt-get install -y \
-    python3-pip
+    apt install -y libcudnn7 libcudnn7-dev \
+    python3-pip \
     wget \
     build-essential \
     cmake \
