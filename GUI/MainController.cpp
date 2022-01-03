@@ -115,14 +115,14 @@ MainController::MainController(int argc, char* argv[])
 
     // Asus is default camera (might change later)
     if(Parse::get().arg(argc, argv, "-v2", tmpString) > -1){
-        Resolution::setResolution(512, 424);
-        Intrinsics::setIntrinics(528, 528, 256, 212);
+        Resolution::getInstance(640, 360);
+        Intrinsics::getInstance(461, 461, 325, 178)
     } else if(Parse::get().arg(argc, argv, "-tum3", tmpString) > -1) {
-        Resolution::setResolution(640, 480);
-        Intrinsics::setIntrinics(535.4, 539.2, 320.1, 247.6);
+        Resolution::getInstance(640, 360);
+        Intrinsics::getInstance(461, 461, 325, 178)
     } else {
-        Resolution::setResolution(640, 480);
-        Intrinsics::setIntrinics(528, 528, 320, 240);
+        Resolution::getInstance(640, 360);
+        Intrinsics::getInstance(461, 461, 325, 178)
     }
 
     if (calibrationFile.length()) loadCalibration(calibrationFile);
