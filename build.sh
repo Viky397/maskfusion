@@ -283,7 +283,8 @@ cd toml11
 git checkout v2.4.0
 
 cd ..
-fi # --build-dependencies
+
+# --build-dependencies
 
 if [ -z "${BOOST_ROOT}" -a -d deps/boost ]; then
   BOOST_ROOT=$(pwd)/deps/boost
