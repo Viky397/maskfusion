@@ -152,6 +152,7 @@ if [[ $* == *--build-dependencies* ]] ; then
   highlight "Building opencv..."
   git_clone "git clone --branch 3.4.1 --depth=1 https://github.com/opencv/opencv.git"
   cd opencv
+  git checkout 3.4
   mkdir -p build
   cd build
   cmake \
