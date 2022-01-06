@@ -280,7 +280,7 @@ FrameDataPointer ImageLogReader::loadFrameFromDrive(const size_t& index) {
     if (!result->mask.isContinuous() || result->mask.type() != CV_8UC1) throw std::invalid_argument("Incompatible mask image.");
   }
 
-  result->timestamp = index * 1000.0f / rateHz;
+  result->timestamp = index;
   result->index = index;
 
   return result;
