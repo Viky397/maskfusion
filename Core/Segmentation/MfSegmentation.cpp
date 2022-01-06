@@ -236,7 +236,7 @@ SegmentationResult MfSegmentation::performSegmentation(std::list<std::shared_ptr
 
     // Run connected-components on segmented map
     cv::Mat statsComp, centroidsComp;
-    int nComponents = cv::connectedComponentsWithStats(cv8UC1Buffer, cvLabelComps, statsComp, centroidsComp, 4);
+    int nComponents = cv::connectedComponentsWithStats(cv8UC1Buffer, cvLabelComps, statsComp, centroidsComp, 4, CV_32S, 4);
     TOCK("segmentation-geom-post");
 
     // Todo, this can be faster! (GPU?)
